@@ -1,16 +1,76 @@
 {
-  "pluginAlias": "ExampleHomebridgePlugin",
+  "pluginAlias": "HomebridgeVirtualSwitches",
   "pluginType": "platform",
   "singular": true,
   "schema": {
     "type": "object",
     "properties": {
-      "name": {
-        "title": "Name",
+      "platform": {
         "type": "string",
-        "required": true,
-        "default": "Example Dynamic Platform"
+        "title": "Platform Name",
+        "default": "HomebridgeVirtualSwitches",
+        "description": "Do not change Platform name!; must be 'HomebridgeVirtualSwitches"
+      },
+      "devices": {
+        "type": "array",
+        "title": "Virtual Switches",
+        "items": {
+          "type": "object",
+          "title": "Switch Configuration",
+          "properties": {
+            "Name": {
+              "type": "string",
+              "title": "Switch Name",
+              "required": true,
+              "description": "Name this switch."
+            },
+            "SwitchStayOn": {
+              "type": "boolean",
+              "title": "Check if the switch is to stay on. (be stateful)",
+              "default": false
+            },
+            "Time": {
+              "type": "integer",
+              "title": "Time to stay on (in milliseconds)",
+              "default": 60000,
+               "description": "Enter the time (in msec) that the switch must stay on after it was triggered. (Only relevant if switch is not stateful.)"
+            },
+            "UseLogFile": {
+              "type": "boolean",
+              "title": "Check if this switch will be triggered by keywords/phrase as they appear live in aon log file",
+              "default": false
+            },
+            "LogFilePath": {
+              "type": "string",
+              "title": "Log File Path",
+              "default": "/var/lib/homebridge/homebridge.log",
+              "description": "Enter full/path/to/log/file/name.extension"
+            },
+            "Keywords": {
+              "type": "array",
+              "title": "Keywords to trigger the switch",
+              "items": {
+                "type": "string"
+              }, 
+              "description": "Enter the keyword (keyphrase) that will trigger the switch when it appears in the log file"
+            },
+            "EnableStartupDelay": {
+              "type": "boolean",
+              "title": "Enable Startup Delay",
+              "default": false,
+              "description": "Check if this switch should not become active until a delay time passed after Homebridge starts."
+            },
+            "StartupDelay": {
+              "type": "integer",
+              "title": "Startup Delay (in milliseconds)",
+              "default": 10000,
+              "description": "Enter the time to delay the switch start after Homebridge (re-)starts. (Only relevant if Enable Startup Delay is checked.)"
+            }
+          },
+          "required": ["Name"]
+        }
       }
-    }
+    },
+    "required": ["platform", "devices"]
   }
 }

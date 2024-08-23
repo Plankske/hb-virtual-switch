@@ -6,13 +6,11 @@ export class HomebridgeVirtualSwitchesAccessory {
   private switchState = false;
   private timer: NodeJS.Timeout | undefined;
   private timerEndTime: number | undefined;
-  private useLogFile: boolean;
 
   constructor(
     private readonly platform: HomebridgeVirtualSwitchesPlatform,
     public readonly accessory: PlatformAccessory,
   ) {
-    this.useLogFile = accessory.context.device.UseLogFile;
     // Log tp see the accessory context
     this.platform.log.debug('Accessory context:', JSON.stringify(this.accessory.context));
 
