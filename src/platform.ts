@@ -14,6 +14,7 @@ interface DeviceConfig {
   Keywords: string[];
   EnableStartupDelay: boolean;
   StartupDelay: number;
+  NormallyClosed: boolean;
 }
 
 export class HomebridgeVirtualSwitchesPlatform implements DynamicPlatformPlugin {
@@ -84,6 +85,7 @@ export class HomebridgeVirtualSwitchesPlatform implements DynamicPlatformPlugin 
         Keywords: Array.isArray(deviceConfig.Keywords) ? deviceConfig.Keywords : [],
         EnableStartupDelay: deviceConfig.EnableStartupDelay,
         StartupDelay: deviceConfig.StartupDelay,
+        NormallyClosed: deviceConfig.NormallyClosed,
       };
       
       //this.log.debug('Device config:', JSON.stringify(device));
@@ -181,6 +183,7 @@ export class HomebridgeVirtualSwitchesPlatform implements DynamicPlatformPlugin 
   private isPluginLogMessage(line: string): boolean {
     return line.includes('homebridge-virtual-switch') || line.includes('HomebridgeVirtualSwitches');
   }
+  
   // Helper method to escape special characters in keywords
   private escapeSpecialChars(keyword: string): string {
     return keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); 

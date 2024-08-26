@@ -49,20 +49,14 @@ export class HomebridgeVirtualSwitchesAccessory {
     const newHomeKitState = value as boolean;
     const device = this.accessory.context.device;
 
-    if (device.NormallyClosed) { //DVDP added line
-      this.platform.log.debug(`[${device.Name}] setOn called with value: ${newHomeKitState}`);
-    } //DVDP added line
+    this.platform.log.debug(`[${device.Name}] setOn called with value: ${newHomeKitState}`);
 
     // For normally closed switches, we invert the HomeKit state, for normally open switches, we use the HomeKit state as-is
-    if (!device.NormallyClosed){
-      this.switchState = device.NormallyClosed ? !newHomeKitState : newHomeKitState;
-    } else {
-      this.switchState = newHomeKitState;
-    }
-
+    this.switchState = device.NormallyClosed ? !newHomeKitState : newHomeKitState;
+ 
     this.platform.log.debug(`[${device.Name}] New internal switchState: ${this.switchState}`);
 
-    //this.updateHomeKitState();
+    this.updateHomeKitState();
 
     if (this.switchState !== device.NormallyClosed) {
       this.platform.log.info(`Switch "${device.Name}" turned ${device.NormallyClosed ? 'off' : 'on'} in HomeKit.`);
@@ -77,9 +71,7 @@ export class HomebridgeVirtualSwitchesAccessory {
 
   async getOn(): Promise<CharacteristicValue> {
     const homeKitState = this.getHomeKitState();
-    if (this.accessory.context.device.NormallyClosed) { //DVDP added line
-      this.platform.log.debug(`[${this.accessory.context.device.Name}] getOn called, returning: ${homeKitState}`);
-    } //DVDP added line
+    this.platform.log.debug(`[${this.accessory.context.device.Name}] getOn called, returning: ${homeKitState}`);
     return homeKitState;
   }
 
@@ -163,9 +155,7 @@ export class HomebridgeVirtualSwitchesAccessory {
     // For both normally open and closed switches, we want to return the internal state as-is
     const homeKitState = this.switchState;
     //const homeKitState = this.accessory.context.device.NormallyClosed ? !this.switchState : this.switchState;
-    if (this.accessory.context.device.NormallyClosed) { //DVDP added line
-      this.platform.log.debug(`[${this.accessory.context.device.Name}] getHomeKitState: internal state: ${this.switchState}, HomeKit state: ${homeKitState}`);
-    }
+    this.platform.log.debug(`[${this.accessory.context.device.Name}] getHomeKitState: internal state: ${this.switchState}, HomeKit state: ${homeKitState}`);
     return homeKitState;
   }
 
