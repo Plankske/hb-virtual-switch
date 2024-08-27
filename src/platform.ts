@@ -132,9 +132,10 @@ export class HomebridgeVirtualSwitchesPlatform implements DynamicPlatformPlugin 
 
     tail.stdout.on('data', (data: Buffer) => {
       const line = data.toString().trim();
-      if (!this.isPluginLogMessage(line)) {
-        this.checkKeywords(line, uuid);
-      }
+      this.checkKeywords(line, uuid);
+      //if (!this.isPluginLogMessage(line)) {
+      //  this.checkKeywords(line, uuid);
+      //}
     });
 
     tail.stderr.on('data', (data: Buffer) => {
@@ -149,10 +150,7 @@ export class HomebridgeVirtualSwitchesPlatform implements DynamicPlatformPlugin 
   }
 
   private checkKeywords(line: string, uuid: string) {
-    if (this.isPluginLogMessage(line)) {
-      return;
-
-    }
+    
     //this.log.debug(`Checking keywords for UUID: ${uuid}`); // Log UUID
 
     const accessoryInstance = this.accessoryInstances.get(uuid);
@@ -166,9 +164,13 @@ export class HomebridgeVirtualSwitchesPlatform implements DynamicPlatformPlugin 
       //this.log.error(`Device configuration is missing for UUID ${uuid}`);
       return;
     }
-
+    
+    if (this.isPluginLogMessage(line,device)) {
+      return;
+    }
     const cleanedLine = this.escapeSpecialChars(this.removeAnsiCodes(line).toLowerCase());
-    const processedKeywords = device.Keywords.map((keyword: string) => this.escapeSpecialChars(this.removeAnsiCodes(keyword).toLowerCase()));
+    const processedKeywords = device.Keywords.map((keyword: string) => 
+      this.escapeSpecialChars(this.removeAnsiCodes(keyword).toLowerCase()));
 
     if (processedKeywords.some((keyword: string) => cleanedLine.includes(keyword))) {
     //  this.log.debug(`Keyword match found for switch "${device.Name}"`);
@@ -180,9 +182,19 @@ export class HomebridgeVirtualSwitchesPlatform implements DynamicPlatformPlugin 
 
 
   // Helper method to check if the line is a plugin log message (needed when debugging)
-  private isPluginLogMessage(line: string): boolean {
-    return line.includes('homebridge-virtual-switch') || line.includes('HomebridgeVirtualSwitches');
+  private isPluginLogMessage(line: string, device: DeviceConfig): boolean {
+    if (!device.UseLogFile) {
+      return false; // Don't exclude any lines for switches not using log file monitoring
+    }
+    
+    // Exclude lines that contain both the plugin name and the specific switch name
+    return (line.includes('homebridge-virtual-switch') || line.includes('HomebridgeVirtualSwitches')) 
+           && line.includes(device.Name);
   }
+  
+  //private isPluginLogMessage(line: string): boolean {
+  //  return line.includes('homebridge-virtual-switch') || line.includes('HomebridgeVirtualSwitches');
+  //}
   
   // Helper method to escape special characters in keywords
   private escapeSpecialChars(keyword: string): string {
