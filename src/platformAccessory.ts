@@ -21,8 +21,17 @@ export class HomebridgeVirtualSwitchesAccessory {
       .onSet(this.setOn.bind(this))
       .onGet(this.getOn.bind(this));
 
+    const device = this.accessory.context.device;
+    const RememberState = device.RememberState;
+      
+    // Initialize the switch state based on NormallyClosed setting or last saved state
+    if (RememberState && accessory.context.device.lastState !== null) {
+      this.switchState = accessory.context.device.lastState;
+    } else {
+      this.switchState = this.accessory.context.device.NormallyClosed;
+    }
     // Initialize the switch state based on NormallyClosed setting
-    this.switchState = this.accessory.context.device.NormallyClosed;
+    //this.switchState = this.accessory.context.device.NormallyClosed;
 
     this.updateHomeKitState();
 
@@ -53,6 +62,11 @@ export class HomebridgeVirtualSwitchesAccessory {
     } else {
       this.platform.log.info(`Switch "${device.Name}" turned ${device.NormallyClosed ? 'on' : 'off'}.`);
       this.clearTimer();
+    }
+
+    // Save the current state if RememberState is enabled
+    if (device.RememberState) {
+      this.platform.saveSwitchState(device.Name, this.switchState);
     }
   }
 
@@ -94,6 +108,11 @@ export class HomebridgeVirtualSwitchesAccessory {
     } else {
       this.platform.log.info(`Switch "${device.Name}" turned ${device.NormallyClosed ? 'on' : 'off'}.`);
       this.clearTimer();
+    }
+
+    // Save the current state if RememberState is enabled
+    if (device.RememberState) {
+      this.platform.saveSwitchState(device.Name, this.switchState);
     }
   }
 

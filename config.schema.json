@@ -72,6 +72,12 @@
               "title": "Startup Delay (in ms)",
               "default": 10000,
               "description": "Time in milliseconds to delay the switch start after Homebridge restarts."
+            },
+            "RememberState" : {
+              "type": "boolean",
+              "title" : "Restart in last known state",
+              "default" : false,
+              "description" : "Switch will restart in its last known state (only for non-log-monitoring stateful switches)."
             }
           },
           "required": ["Name"]
