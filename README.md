@@ -1,5 +1,4 @@
 <p align="center">
-
 <img src="https://github.com/homebridge/branding/raw/latest/logos/homebridge-wordmark-logo-vertical.png" width="150">
 </p>
 
@@ -8,17 +7,17 @@
 # Homebridge Virtual Switches
 </p>
 
-<span align = "center">
+<p align = "center">
 <img src="https://github.com/Plankske/hb-virtual-switch/blob/latest/image.png" width="100"/>
 </p>
 
-</span>
 
 > **Homebridge v2.0 Information**  
 > This plugin is Homebridge v2.0 ready and requires Node.js v20.14.12 or higher.  
 > For information on how to upgrade Node.js, see [this guide](https://github.com/homebridge/homebridge/wiki/How-To-Update-Node.js).
 
 ---
+<span align = "left">
 
 **Homebridge-Virtual Switches** is a plugin that creates a variety of virtual switches, specifically those triggered by the appearance of keywords in log files. The plugin monitors any log file (defaults to the Homebridge log file) for specific keywords or key phrases. When a keyword is detected, a virtual switch (normally open or normally closed, stateful or not) is triggered. This can be helpful in advanced HomeKit automations.
 
