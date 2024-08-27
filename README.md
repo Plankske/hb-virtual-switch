@@ -7,7 +7,7 @@
 <span align = "center">
 
 # Homebridge Virtual Switches
-
+<span align = "center">
 <img src="https://github.com/Plankske/hb-virtual-switch/blob/latest/image.png" width="100"/>
 
 
