@@ -4,62 +4,52 @@
 
 </p>
 
-<span align="center">
-
 # Homebridge Virtual Switches
 
-</span>!(image.png)
-
-> [!IMPORTANT]  
-> **Homebridge v2.0 Information**
-> 
-> This plugin is Homebridge v2.0 ready and requires node.js v20.14.12 or higher.
-> (for information on how to upgrade node.js, see https://github.com/homebridge/homebridge/wiki/How-To-Update-Node.js/)
-> 
+> **Homebridge v2.0 Information**  
+> This plugin is Homebridge v2.0 ready and requires Node.js v20.14.12 or higher.  
+> For information on how to upgrade Node.js, see [this guide](https://github.com/homebridge/homebridge/wiki/How-To-Update-Node.js).
 
 ---
-The plugin creates a variety of virtual switches. Specifically, switches that are triggered by the appearance of keywords in a log files. 
-The plugin acts as an automated attendant that monitors any log file (defaults to the Homebridge log file) for the appearance of certain keywords or key phrases. Occurrence of a keyword triggers a virtual switch (normally open or normally closed, stateful or not) to be switched. This can be helpful in advanced HomeKit automations. 
 
-E.g., the loss of the api authentication of a plugin can break an automation. The log message line that alerts of the loss of authentication is used as the key phrase for triggering virtual switch. A Homekit automation can then be set up to e.g. send an alert (Pushover message, warning light, siren, etc.) 
+**Homebridge-Virtual Switches** is a plugin that creates a variety of virtual switches, specifically those triggered by the appearance of keywords in log files. The plugin monitors any log file (defaults to the Homebridge log file) for specific keywords or key phrases. When a keyword is detected, a virtual switch (normally open or normally closed, stateful or not) is triggered. This can be helpful in advanced HomeKit automations.
 
-The plugin also provides virtual switches that are not triggered by the Homebridge log file. The use of virtual switches is crucial in the development of advanced HomeKit automations.
+*Example:*  
+If a plugin loses API authentication, a log message alerts you. This log message can be used as a key phrase to trigger a virtual switch, allowing HomeKit automations to send alerts (e.g., Pushover message, warning light, siren, etc.).
+
+The plugin also provides virtual switches that are not triggered by the Homebridge log file. The use of virtual switches is crucial in developing advanced HomeKit automations.
 
 ### Additional Requirements
-the following packages are needed for the plugin to function properly
-- strip-ansi
-- child_process
+The following packages are needed for the plugin to function properly:
+- `strip-ansi`
+- `child_process`
 
 ### Configuration
-The plugin allows for the setup of switches that are triggered by keywords of key phrases that appear in the default Homebridge log. (other files can be used as well, as long as there is no encryption, by entering the correct path to the log file).
-- Platform Name: CANNOT BE CHANGED - must be `HomebridgeVirtualSwitches'
-- Switch Name: Every switch must have a name and is defined by the following characteristics:
-    - Normally Closed Switch: Set the switch type: normally open, aka. the switch is off when not yet triggered (= default setting) or normally closed (aka the switch is on when not yet triggered) 
-    - Stateful: Determines the switch behavior after the switch is triggered:
-        - stateful: The switch state does not change after it is triggered, or
-        - not stateful: The switch state returns to its normal state after a timer runs out (= default setting)
-    - Auto Off Time: The time which a not stateful switch stays triggered before it returns to it normal state (this setting is only relevant for non-stateful switches)
-    - Monitor Log File: when checked, the switch will be triggered by the appearance of Keywords in the log file,
-    - Log File Path: Enter the full path to the log file that must be monitored (multiple switches can monitor different log files). The file must be in ASCII format. Default is pointing to the Homebridge log file location.
-    -Keywords: Enter one keyword or key phrase as it will occur in the log file. Do not attempt to format the keywords. The keywords and the log file lines will be compared lowercased and stripped of any ANSI code.
-    - Enable Startup Delay: When checked the switch will not become active until a certain time has passed after Homebridge started. This is to prevent switches from being switched as Homebridge is initializing.
-    - Startup Delay: The time between Homebridge startup and the startup of the switch.
-    - Restart in last known state: When checked, the switch will come on in its last known state before Homebridge powered down. 
-        Note: only works for stateful switches that are not controlled by keywords appearing in a log file.
+The plugin allows setting up switches that are triggered by keywords or key phrases appearing in the default Homebridge log. You can also specify a different log file if needed.
 
-- Multiple switches, each with their own Switch Name can be set up.
+- **Platform Name:** Must be `HomebridgeVirtualSwitches` (cannot be changed).
+- **Switch Name:** Define a unique name for each switch.
+    - **Normally Closed Switch:** Set the switch type: normally open (default) or normally closed.
+    - **Stateful:** Determines the switch behavior after being triggered:
+        - **Stateful:** The switch state does not change after being triggered.
+        - **Non-stateful:** The switch state returns to its normal state after a timer runs out (default).
+    - **Auto Off Time:** Duration before a non-stateful switch returns to its normal state.
+    - **Monitor Log File:** Check this option to trigger the switch by keywords in the log file.
+    - **Log File Path:** Enter the full path to the log file to monitor (multiple switches can monitor different files). The file must be in ASCII format. The default is the Homebridge log file location.
+    - **Keywords:** Enter one keyword or key phrase as it appears in the log file. Keywords and log lines are compared in lowercase and stripped of any ANSI code.
+    - **Enable Startup Delay:** Delay switch activation after Homebridge starts to prevent premature triggers.
+    - **Startup Delay:** Time between Homebridge startup and switch activation.
+    - **Restart in Last Known State:** If enabled, the switch will start in its last known state before Homebridge shut down. This only works for stateful switches not controlled by log file keywords.
 
-Note:
-- a stateful switch that is triggered by keyword(s) from a log file, will not switch when any keyword for that switch appears again unless the switch has been reset by amy other means (manually, HomeKit scene, etc.). Once that switch is reset, it can be triggered again by any of the keywords appearing in the log file.
-- a non-stateful switch that is triggered by keyword(s) from a log file, will not switch when any keyword for that switch appears again as long as the timer of that switch has not expired. Once it expires, it can be triggered again by any of the keywords appearing in the log file.
+Multiple switches can be set up, each with its own configuration.
 
-### Operation of switches that are controlled by keywords in a log file
-The switches are either stateful or not. If so set, the occurrence of one or more keywords/phrases will trigger the corresponding switch.
-- If the switch is stateful, re-occurrence of a keyword/phrase will not change the switch state. In other words, if it was switched on/off before, the re-occurrence will have no impact (it will stay on/off). Once the switch is reset from its triggered state, the occurrence of any keyword will trigger the switch to change its state.
-- If the switch is not stateful, re-occurrence of a keyword/phrase before the timer has run out will not change the switch state. Once the timer has run out, the switch state will be reset from its triggered state. Thereafter, if the switch is triggered again, its stat will change again for the duration of the timer.
-Note: this means that repeated triggering of a not stateful switch will not results in a longer time to reset.  
+### Operation of Switches Controlled by Log File Keywords
+Switches can be stateful or not. If set, the occurrence of one or more keywords/phrases triggers the corresponding switch.
 
-### Found a bug?
+- **Stateful Switches:** Once triggered, reoccurrence of the keyword/phrase will not change the switch state until it is manually reset.
+- **Non-stateful Switches:** The switch will not be retriggered until the timer has expired.
 
-If you think you've found a bug, please first check the requirements and read through the open Issues. If you're confident it's a new bug, go ahead and create a new GitHub issue. Be sure to include as much information as possible and please be patient.
+*Note:* Repeated triggering of a non-stateful switch will not extend nor reset the timer.
 
+### Found a Bug?
+If you think you've found a bug, please first check the requirements and read through the open issues. If you're confident it's a new bug, create a new GitHub issue with as much information as possible. Please be patient as we review your report.
