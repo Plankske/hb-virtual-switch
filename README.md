@@ -42,7 +42,6 @@ The plugin allows for the setup of switches that are triggered by keywords of ke
     -Keywords: enter one keyword or keyphrase as it will occur in the log file. Do not attempt to format the keywords. The keywords and the log file lines will be compared lowercased and stripped of any ANSI code.
     - Enable Startyp Delay: when checked the switch will not become active until a certain time has passed after Homebridge started. This is to prevent switches from being switched as Homebridge is initializing.
     - Startyp Delay: the time between Homebridge startup and the startup of the switch.
-    - Remember State: when checked, the switch will start up in the same state (open (off) or closed (on)) as it was when Homebridge last shut down. This is only valid for Stateful switches. Non-stateful switches will start up in their default state, regardless of whether they were triggered and a timer was running at the time Homebridge shut down.
 - Multiple switches, each with their own Switch Name can be set up.
 
 Note:
