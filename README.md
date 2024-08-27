@@ -1,15 +1,16 @@
 <p align="center">
 
 <img src="https://github.com/homebridge/branding/raw/latest/logos/homebridge-wordmark-logo-vertical.png" width="150">
-
 </p>
 
 <span align = "center">
 
 # Homebridge Virtual Switches
+</p>
+
 <span align = "center">
 <img src="https://github.com/Plankske/hb-virtual-switch/blob/latest/image.png" width="100"/>
-
+</p>
 
 </span>
 
