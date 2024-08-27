@@ -4,7 +4,14 @@
 
 </p>
 
+<span align = "center">
+
 # Homebridge Virtual Switches
+
+<img src="https://github.com/Plankske/hb-virtual-switch/blob/latest/image.png" width="100"/>
+
+
+</span>
 
 > **Homebridge v2.0 Information**  
 > This plugin is Homebridge v2.0 ready and requires Node.js v20.14.12 or higher.  
@@ -19,11 +26,13 @@ If a plugin loses API authentication, a log message alerts you. This log message
 
 The plugin also provides virtual switches that are not triggered by the Homebridge log file. The use of virtual switches is crucial in developing advanced HomeKit automations.
 
+---
 ### Additional Requirements
 The following packages are needed for the plugin to function properly:
 - `strip-ansi`
 - `child_process`
 
+---
 ### Configuration
 The plugin allows setting up switches that are triggered by keywords or key phrases appearing in the default Homebridge log. You can also specify a different log file if needed.
 
@@ -43,6 +52,7 @@ The plugin allows setting up switches that are triggered by keywords or key phra
 
 Multiple switches can be set up, each with its own configuration.
 
+---
 ### Operation of Switches Controlled by Log File Keywords
 Switches can be stateful or not. If set, the occurrence of one or more keywords/phrases triggers the corresponding switch.
 
@@ -51,5 +61,6 @@ Switches can be stateful or not. If set, the occurrence of one or more keywords/
 
 *Note:* Repeated triggering of a non-stateful switch will not extend nor reset the timer.
 
+---
 ### Found a Bug?
 If you think you've found a bug, please first check the requirements and read through the open issues. If you're confident it's a new bug, create a new GitHub issue with as much information as possible. Please be patient as we review your report.
