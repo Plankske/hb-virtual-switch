@@ -1,5 +1,5 @@
 {
-  "name": "homebridge-virtual-switch",
+  "name": "@vandubois/homebridge-virtual-switch",
   "displayName": "Homebridge Virtual Switches",
   "type": "module",
   "version": "1.0.0",
