@@ -6,10 +6,16 @@
     "type": "object",
     "properties": {
       "name": {
+        "title": "Name",
+        "type": "string",
+        "required": true,
+        "default": "HomebridgeVirtualSwitches"
+      },
+      "platform": {
         "type": "string",
         "title": "Platform Name",
         "default": "HomebridgeVirtualSwitches",
-        "description": "Do not change Platform name!"
+        "description": "Do not change Name, nor Platform name!"
       },
       "devices": {
         "type": "array",
@@ -84,6 +90,6 @@
         }
       }
     },
-    "required": ["platform", "devices"]
+    "required": ["name","platform", "devices"]
   }
 }
