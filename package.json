@@ -3,7 +3,7 @@
   "displayName": "Homebridge Virtual Switches",
   "type": "module",
   "version": "1.0.0",
-  "private": true,
+  "private": false,
   "description": "Creation of virtual switches, triggered independently and by keywords appearing in the Homebridge log file.",
   "author": "DVDP",
   "license": "Apache-2.0",
