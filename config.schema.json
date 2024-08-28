@@ -5,7 +5,7 @@
   "schema": {
     "type": "object",
     "properties": {
-      "platform": {
+      "name": {
         "type": "string",
         "title": "Platform Name",
         "default": "HomebridgeVirtualSwitches",
