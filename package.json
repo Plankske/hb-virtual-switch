@@ -1,31 +1,31 @@
 {
-  "name": "homebridge-virtual-switch",
+  "name": "@vandubois/homebridge-virtual-switch",
   "displayName": "Homebridge Virtual Switches",
   "type": "module",
-  "version": "1.0.0",
-  "private": true,
+  "version": "1.0.3",
+  "private": false,
   "description": "Creation of virtual switches, triggered independently and by keywords appearing in the Homebridge log file.",
   "author": "DVDP",
   "license": "Apache-2.0",
   "homepage": "https://github.com/Plankske/hb-virtual-switch.git",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Plankske/hb-virtual-switch.git"
+    "url": "git+https://github.com/Plankske/hb-virtual-switch.git"
   },
   "bugs": {
     "url": "https://github.com/Plankske/hb-virtual-switch/issues"
   },
   "keywords": [
-    "homebridge-plugin", 
+    "homebridge-plugin",
     "log monitoring",
-    "vitual switch", 
-    "log file", 
-    "stateful", 
+    "vitual switch",
+    "log file",
+    "stateful",
     "switch"
   ],
   "main": "dist/index.js",
   "engines": {
-    "node": "^20.16.0",
+    "node": "^20.16.0 || ^18.20.4",
     "homebridge": "^1.8.0 || ^2.0.0-beta.0"
   },
   "scripts": {
