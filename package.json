@@ -10,17 +10,17 @@
   "homepage": "https://github.com/Plankske/hb-virtual-switch.git",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Plankske/hb-virtual-switch.git"
+    "url": "git+https://github.com/Plankske/hb-virtual-switch.git"
   },
   "bugs": {
     "url": "https://github.com/Plankske/hb-virtual-switch/issues"
   },
   "keywords": [
-    "homebridge-plugin", 
+    "homebridge-plugin",
     "log monitoring",
-    "vitual switch", 
-    "log file", 
-    "stateful", 
+    "vitual switch",
+    "log file",
+    "stateful",
     "switch"
   ],
   "main": "dist/index.js",
