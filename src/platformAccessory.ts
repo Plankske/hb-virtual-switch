@@ -14,6 +14,19 @@ export class HomebridgeVirtualSwitchesAccessory {
   ) {
     this.useLogFile = accessory.context.device.UseLogFile;
 
+    // Set accessory information
+    const accessoryInformationService = this.accessory.getService(this.platform.Service.AccessoryInformation);
+    if (accessoryInformationService) {
+      accessoryInformationService
+        .setCharacteristic(this.platform.Characteristic.Manufacturer, 'HomebridgeVirtualSwitchesPlatform')
+        .setCharacteristic(this.platform.Characteristic.Model, 'HomebridgeVirtualSwitchAccessory-Switch')
+        //.setCharacteristic(this.platform.Characteristic.Model, `HomebridgeVirtualSwitchAccessory-${accessory.context.device.Name}`)
+        .setCharacteristic(this.platform.Characteristic.Name, accessory.context.device.Name)
+        .setCharacteristic(this.platform.Characteristic.SerialNumber, `HomebridgeVirtualSwitchAccessory-${accessory.context.device.Name}`)
+        //.setCharacteristic(this.platform.Characteristic.SerialNumber, `HomebridgeVirtualSwitchAccessory-${this.accessory.context.aid}`)
+        .setCharacteristic(this.platform.Characteristic.FirmwareRevision, '0.0.0');
+    }
+
     this.service = this.accessory.getService(this.platform.Service.Switch) || this.accessory.addService(this.platform.Service.Switch);
     this.service.setCharacteristic(this.platform.Characteristic.Name, accessory.context.device.Name);
 

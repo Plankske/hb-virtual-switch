@@ -7,6 +7,10 @@
 # Homebridge Virtual Switches
 </p>
 
+<span align = "left">
+
+[![verified-by-homebridge](https://badgen.net/badge/homebridge/verified/purple)](https://github.com/homebridge/homebridge/wiki/Verified-Plugins)
+
 <p align = "center">
 <img src="https://github.com/Plankske/hb-virtual-switch/blob/latest/image.png" width="100"/>
 </p>

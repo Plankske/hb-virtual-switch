@@ -79,6 +79,12 @@ export class HomebridgeVirtualSwitchesPlatform implements DynamicPlatformPlugin 
     const devices: DeviceConfig[] = Array.isArray(this.config.devices) ? this.config.devices : [];
 
     for (const deviceConfig of devices) {
+      if (!deviceConfig.Name || deviceConfig.Name.trim() === '') {
+        this.log.info('ERROR: Switch with missing "Switch Name" found in this Plugin Config.');
+        this.log.info('ERROR: Give it a "Switch Name" in your "Homebridge Virtual Switches Plugin Config".');
+        //continue; // Skip this device but continue processing others
+      }
+
       const device = {
         Name: deviceConfig.Name,
         SwitchStayOn: deviceConfig.SwitchStayOn,

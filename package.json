@@ -48,5 +48,9 @@
   },
   "dependencies": {
     "strip-ansi": "7.1.0"
+  },
+  "funding": {
+  "type" : "paypal",
+  "url" : "https://paypal.me/Plankske"
   }
 }
