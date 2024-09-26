@@ -2,7 +2,7 @@
   "name": "@vandubois/homebridge-virtual-switch",
   "displayName": "Homebridge Virtual Switches",
   "type": "module",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "private": false,
   "description": "Creation of virtual switches, triggered independently and by keywords appearing in the Homebridge log file.",
   "author": "DVDP",
@@ -50,7 +50,7 @@
     "strip-ansi": "7.1.0"
   },
   "funding": {
-  "type" : "paypal",
-  "url" : "https://paypal.me/Plankske"
+    "type": "paypal",
+    "url": "https://paypal.me/Plankske"
   }
 }
