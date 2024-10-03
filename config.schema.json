@@ -9,13 +9,14 @@
         "title": "Name",
         "type": "string",
         "required": true,
-        "default": "HomebridgeVirtualSwitches"
+        "default": "HomebridgeVirtualSwitches",
+        "description": "This name will be displayed as child bridge name and in logs."
       },
       "platform": {
         "type": "string",
         "title": "Platform Name",
         "default": "HomebridgeVirtualSwitches",
-        "description": "Do not change Name, nor Platform name!"
+        "description": "Do not change Platform name!"
       },
       "devices": {
         "type": "array",
@@ -30,22 +31,25 @@
               "required": true
             },
             "NormallyClosed": {
-            "type": "boolean",
-            "title": "Normally Closed Switch",
-            "default": false,
-            "description": "Check to make the switch normally-closed (on). Default is normally-open (off)."
+              "type": "boolean",
+              "title": "Normally On Switch",
+              "default": false,
+              "description": "Check to make the switch normally-closed (on). Default is normally-open (off)."
             },
             "SwitchStayOn": {
               "type": "boolean",
               "title": "Stateful",
               "default": false,
-              "description": "Check to make the switch stateful (remain on after trigger)."
+              "description": "Check to make the switch stateful (disable timer)."
             },
             "Time": {
               "type": "integer",
-              "title": "Auto Off Time (in ms)",
+              "title": "Timer (in ms)",
               "default": 5000,
-               "description": "Duration in milliseconds that the switch stays on after triggering. Only relevant if the switch is not stateful."
+              "description": "Duration in milliseconds that the switch stays after triggering. Only relevant if the switch is not stateful.",
+              "condition": {
+                "functionBody": "return model.devices[arrayIndices[0]].SwitchStayOn === false;"
+              }
             },
             "UseLogFile": {
               "type": "boolean",
@@ -57,15 +61,18 @@
               "type": "string",
               "title": "Log File Path",
               "default": "/var/lib/homebridge/homebridge.log",
-              "description": "Enter the full path to the log file."
+              "description": "Enter the full path to the log file.",
+              "condition": {
+                "functionBody": "return model.devices[arrayIndices[0]].UseLogFile === true;"
+              }
             },
             "Keywords": {
-              "type": "array",
+              "type": "string",
               "title": "Keywords",
-              "items": {
-                "type": "string"
-              }, 
-              "description": "Enter keywords/phrases that will trigger the switch when they appear in the log file (case independent)."
+              "description": "Enter comma separated keywords/phrases that will trigger the switch when they appear in the log file (case independent).",
+              "condition": {
+                "functionBody": "return model.devices[arrayIndices[0]].UseLogFile === true;"
+              }
             },
             "EnableStartupDelay": {
               "type": "boolean",
@@ -76,20 +83,68 @@
             "StartupDelay": {
               "type": "integer",
               "title": "Startup Delay (in ms)",
-              "default": 10000,
-              "description": "Time in milliseconds to delay the switch start after Homebridge restarts."
+              "default": 3000,
+              "description": "Time in milliseconds to delay the switch start after Homebridge restarts.",
+              "condition": {
+                "functionBody": "return model.devices[arrayIndices[0]].EnableStartupDelay === true;"
+              }
             },
-            "RememberState" : {
+            "RememberState": {
               "type": "boolean",
-              "title" : "Restart in last known state",
-              "default" : false,
-              "description" : "Switch will restart in its last known state (only for non-log-monitoring stateful switches)."
+              "title": "Restart in last known state",
+              "default": false,
+              "description": "Switch will restart in its last known state (only for non-log-monitoring stateful switches)."
             }
           },
-          "required": ["Name"]
+          "required": [
+            "Name"
+          ]
         }
       }
     },
-    "required": ["name","platform", "devices"]
-  }
+    "required": [
+      "name",
+      "platform",
+      "devices"
+    ]
+  },
+  "layout": [
+    
+    {
+      "type": "array",
+      "key": "devices",
+      "title": "Devices",
+      "description": "",
+      "buttonText": "Add",
+      "expandable": true,
+      "expanded": true,
+      "items": [
+        {
+          "type": "fieldset",
+          "items": [
+            "devices[].Name",
+            "devices[].Time",
+            "devices[].SwitchStayOn",
+            "devices[].NormallyClosed",
+            "devices[].UseLogFile",
+            "devices[].LogFilePath",
+            "devices[].Keywords",
+            "devices[].EnableStartupDelay",
+            "devices[].StartupDelay",
+            "devices[].RememberState"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "fieldset",
+      "title": "Plugin config",
+      "description": "",
+      "expandable": true,
+      "expanded": false,
+      "items": [
+        "name"
+      ]
+    }
+  ]
 }
