@@ -9,13 +9,14 @@
         "title": "Name",
         "type": "string",
         "required": true,
-        "default": "HomebridgeVirtualSwitches"
+        "default": "HomebridgeVirtualSwitches",
+        "description": "This name will be displayed as child bridge name and in logs."
       },
       "platform": {
         "type": "string",
         "title": "Platform Name",
         "default": "HomebridgeVirtualSwitches",
-        "description": "Do not change Name, nor Platform name!"
+        "description": "Do not change Platform name!"
       },
       "devices": {
         "type": "array",
@@ -108,16 +109,7 @@
     ]
   },
   "layout": [
-    {
-      "type": "fieldset",
-      "title": "General",
-      "description": "",
-      "expandable": true,
-      "expanded": false,
-      "items": [
-        "name"
-      ]
-    },
+    
     {
       "type": "array",
       "key": "devices",
@@ -142,6 +134,16 @@
             "devices[].RememberState"
           ]
         }
+      ]
+    },
+    {
+      "type": "fieldset",
+      "title": "Plugin config",
+      "description": "",
+      "expandable": true,
+      "expanded": false,
+      "items": [
+        "name"
       ]
     }
   ]
