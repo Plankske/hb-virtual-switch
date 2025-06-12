@@ -18,10 +18,18 @@
   "keywords": [
     "homebridge-plugin",
     "log monitoring",
-    "vitual switch",
+    "virtual switch",
     "log file",
     "stateful",
-    "switch"
+    "normally open / closed",
+    "switch",
+    "persistent",
+    "timer",
+    "delayed start",
+    "one shot timer",
+    "keyword", 
+    "trigger word",
+    "reverse"
   ],
   "main": "dist/index.js",
   "engines": {
