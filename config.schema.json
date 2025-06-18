@@ -34,7 +34,7 @@
               "type": "boolean",
               "title": "Normally Closed switch",
               "default": false,
-              "description": "Sets switch is ON (closed) by default and OFF (open) when triggered."
+              "description": "Sets switch to ON (closed) by default and to turn OFF (open) when triggered."
             },
             "SwitchStayOn": {
               "type": "boolean",
