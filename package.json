@@ -2,7 +2,7 @@
   "name": "@vandubois/homebridge-virtual-switch",
   "displayName": "Homebridge Virtual Switches",
   "type": "module",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "private": false,
   "description": "Creation of virtual switches, triggered independently and by keywords appearing in the Homebridge log file.",
   "author": "DVDP",
@@ -29,7 +29,10 @@
     "one shot timer",
     "keyword", 
     "trigger word",
-    "reverse"
+    "reverse",
+    "smart switch",
+    "smart home",
+    "home automation"
   ],
   "main": "dist/index.js",
   "engines": {
