@@ -1,5 +1,5 @@
 import { Service, PlatformAccessory, CharacteristicValue } from 'homebridge';
-import { HomebridgeVirtualSwitchesPlatform } from './platform';
+import { HomebridgeVirtualSwitchesPlatform } from './platform.js';
 
 // Define interface for timer info
 interface TimerInfo {
