@@ -2,7 +2,7 @@
   "name": "@vandubois/homebridge-virtual-switch",
   "displayName": "Homebridge Virtual Switches",
   "type": "module",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "private": false,
   "description": "Creation of virtual switches, triggered independently and by keywords appearing in the Homebridge log file.",
   "author": "DVDP",
